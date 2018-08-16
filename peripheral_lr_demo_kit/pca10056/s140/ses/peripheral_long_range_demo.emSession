@@ -1,0 +1,77 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="4" refreshPeriod="0" name="peripheral_long_range_demo_pca10056_s140" radix="16" sizeText="" addressText="0x40015304"/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="peripheral_long_range_demo_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="peripheral_long_range_demo_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="peripheral_long_range_demo_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;Application"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;Board Support"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;None"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;nRF_BLE"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;nRF_Drivers"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;nRF_Drivers_External"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;nRF_Libraries"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;nRF_Log"/>
+ </Project>
+ <Register1>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context;CPU" name="peripheral_long_range_demo_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="peripheral_long_range_demo_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="peripheral_long_range_demo_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="peripheral_long_range_demo_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never">
+   <Watchpoint numelements="0" expression="end_event" evalMode="0" name="end_event" radix="10" linenumber="1044" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="crc_ok_event" evalMode="0" name="crc_ok_event" radix="10" linenumber="1049" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="crc_error_event" evalMode="0" name="crc_error_event" radix="10" linenumber="1053" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="ready_event" evalMode="0" name="ready_event" radix="10" linenumber="1057" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="per_value" evalMode="0" name="per_value" radix="10" linenumber="0" filename="../ses" list=""/>
+  </Watches>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="499" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="536" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6196" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../ugui/ugui.c" selected="0" top="6179" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../ugui/ugui_config.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="217" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../ugui/ugui.h" selected="0" top="199" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="2400" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../../components/softdevice/s140/headers/ble_gap.h" selected="0" top="2374" codecName="Default"/>
+ </Files>
+ <ARMCrossStudioWindow activeProject="peripheral_long_range_demo_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" debugSearchFileMap="C:/tmp/nRF5_SDK_15.0.0_a53641a/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-lr-demo-master/peripheral_lr_demo_kit/main.c&#xa;" fileDialogInitialDirectory="C:/tmp/nRF5_SDK_15.0.0_a53641a/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-lr-demo/peripheral_lr_demo_kit" debugSearchPath="" autoConnectCapabilities="3199"/>
+</session>
