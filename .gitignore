@@ -32,3 +32,4 @@ RTE/
 *.elf
 *.emSession
 *.jlink
+*.hex
