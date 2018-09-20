@@ -30,3 +30,5 @@ RTE/
 *.pdf
 *.ind
 *.elf
+*.emSession
+
