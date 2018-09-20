@@ -1,6 +1,13 @@
 # Long range demo kit
 This application is a demo kit that can be used to easily test the Bluetooth 5 long range feature with the nRF52840.
 
+<div class="row">
+  <div class="column">
+    <img src="pics/screen_pic1.jpg" alt="Display screen while running demo" 
+        title="Screen picture" width="400" />
+  </div>
+</div>
+
 ## Requirements
 * 2x nRF52840-DK (with battery, if it is not connected to PC during the testing)
 * A PC running either Windows, Linux, or Mac OS-X with [nrfjprog](http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.tools%2Fdita%2Ftools%2Fnrf5x_command_line_tools%2Fnrf5x_installation.html&cp=5_1_1) installed
