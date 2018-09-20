@@ -113,8 +113,10 @@ static volatile uint32_t ready_rxevent = 0;
 #define OUTPUT_POWER_SELECTION_BUTTON_EVENT   BSP_EVENT_KEY_1
 #define NON_CONN_OR_CONN_ADV_BUTTON           BSP_BUTTON_2
 #define NON_CONN_OR_CONN_ADV_BUTTON_EVENT     BSP_EVENT_KEY_2
-#define BUTTON_NOT_IN_USE                     BSP_BUTTON_3
-#define BUTTON_NOT_IN_USE_EVENT               BSP_EVENT_KEY_3
+//#define BUTTON_NOT_IN_USE                     BSP_BUTTON_3
+//#define BUTTON_NOT_IN_USE_EVENT               BSP_EVENT_KEY_3
+#define PER_RESET_BUTTON                      BSP_BUTTON_3
+#define PER_RESET_BUTTON_EVENT                BSP_EVENT_KEY_3
 
 #define FAST_BLINK_INTERVAL		APP_TIMER_TICKS(200)
 APP_TIMER_DEF(m_non_conn_fast_blink_timer_id);                /**< Timer used to toggle LED indicating non-connectable advertising on the dev. kit. */
@@ -222,10 +224,36 @@ static inline float calculate_per(void)
 {   
     float per_value = 0;
     
+    if (!ready_rxevent) //prevent division by zero
+      return ((float)0.0);
     /*  Packet error rate: PER = (RADIO EVENTS_RXREADY – CRC ok) / RADIO EVENTS_RXREADY */
     per_value = ((((float)ready_rxevent - (float)crc_ok_event) / (float)ready_rxevent) * 100);
 
     return per_value;
+}
+
+/**@brief Function for manually resetting the PER calculation.
+ */
+static void on_per_reset_selection(void)
+{
+  //Reset the PER calculation variables (counters) to 0 to reset calculation to 0.
+  
+  //Disable interrupts using SD since SD is running..
+  sd_nvic_ClearPendingIRQ(SWI3_EGU3_IRQn);
+  sd_nvic_DisableIRQ(SWI3_EGU3_IRQn);
+  
+  //Reset variables
+  crc_ok_event = 0;
+  end_event = 0;
+  crc_error_event = 0;
+  ready_rxevent = 0;
+  
+  //Enable interrupts using SD since SD is running..
+  sd_nvic_ClearPendingIRQ(SWI3_EGU3_IRQn);
+  sd_nvic_SetPriority(SWI3_EGU3_IRQn, APP_IRQ_PRIORITY_LOW);
+  sd_nvic_EnableIRQ(SWI3_EGU3_IRQn);
+
+  UG_TextboxSetText(&window_1 , TXB_ID_6 , "");
 }
 
 
@@ -295,6 +323,7 @@ static void on_ble_gap_evt_connected(ble_gap_evt_t const * p_gap_evt)
     err_code = app_timer_stop(m_conn_adv_fast_blink_timer_id);
     APP_ERROR_CHECK(err_code);
     bsp_board_led_on(CONN_ADV_CONN_STATE_LED);
+    UG_TextboxSetBackColor (&window_1 , TXB_ID_9 , C_DARK_GREEN );   
   
     /* MQ  Start our own RSSI measurements. */
     rssi_measurements_start();
@@ -316,8 +345,10 @@ static void on_ble_gap_evt_disconnected(ble_gap_evt_t const * p_gap_evt)
       // Start advertising with the current setup.
       bsp_board_leds_off();
       set_current_adv_params_and_start_advertising();
-    }
 
+    }
+    UG_TextboxSetBackColor (&window_1 , TXB_ID_9 , C_DARK_RED );  
+    on_per_reset_selection();
 }
 
 #define NRF_LOG_FLOAT_MARKER8 "%10d.%08d"
@@ -452,7 +483,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
               rssi_value_prev = rssi_value;
             }
             if (per_value_prev != per_value) {
-              sprintf(&m_summary_string2[0], "%0.8f", per_value);
+              sprintf(&m_summary_string2[0], "%0.6f", per_value);
               UG_TextboxSetText(&window_1 , TXB_ID_6 , m_summary_string2);
               per_value_prev = per_value;
             }                                                
@@ -610,9 +641,6 @@ static void log_init(void)
 
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 }
-
-
-
 
 
 /**@brief Function for the Timer initialization.
@@ -852,6 +880,7 @@ static void on_non_conn_or_conn_adv_selection_state_set(adv_scan_type_seclection
       err_code = app_timer_stop(m_conn_adv_fast_blink_timer_id); 
       APP_ERROR_CHECK(err_code);
       bsp_board_led_off(CONN_ADV_CONN_STATE_LED);
+      UG_TextboxSetBackColor (&window_1 , TXB_ID_9 , C_DARK_RED );   
 
       err_code = app_timer_start(m_non_conn_fast_blink_timer_id, FAST_BLINK_INTERVAL, NULL);
       APP_ERROR_CHECK(err_code);
@@ -863,9 +892,9 @@ static void on_non_conn_or_conn_adv_selection_state_set(adv_scan_type_seclection
     {
       // Current state is connectable advertising. Start blinking associated LED.
      
-       err_code = app_timer_stop(m_non_conn_fast_blink_timer_id); 
-       APP_ERROR_CHECK(err_code);
-       bsp_board_led_off(NON_CONN_ADV_LED);
+      err_code = app_timer_stop(m_non_conn_fast_blink_timer_id); 
+      APP_ERROR_CHECK(err_code);
+      bsp_board_led_off(NON_CONN_ADV_LED);
 
 
       err_code = app_timer_start(m_conn_adv_fast_blink_timer_id, FAST_BLINK_INTERVAL, NULL);
@@ -917,8 +946,8 @@ void bsp_evt_handler(bsp_event_t event)
 {
   ret_code_t err_code;	
    
-    if(event != BUTTON_NOT_IN_USE_EVENT)
-    {
+    //if(event != BUTTON_NOT_IN_USE_EVENT)
+    //{
         
     
 	 // Set the correct parameters, depending on the button pushed.		
@@ -931,14 +960,21 @@ void bsp_evt_handler(bsp_event_t event)
 						
 	  case OUTPUT_POWER_SELECTION_BUTTON_EVENT:
 	  {
-	  	on_output_power_selection_button();
+            on_output_power_selection_button();
 	  } break;
 
           case NON_CONN_OR_CONN_ADV_BUTTON_EVENT:
           {
             on_non_conn_or_conn_adv_selection();
           } break;
-                        
+          
+          //MQ
+          case PER_RESET_BUTTON_EVENT:
+          {
+            on_per_reset_selection();
+            return; //no need to modify connection so just exit
+          }
+
           default:
             break;
         }
@@ -946,7 +982,7 @@ void bsp_evt_handler(bsp_event_t event)
         disconnect_stop_adv();
 	advertising_data_set(); 
 	advertising_start();
-    }
+    //}
    
 }
 
@@ -1054,7 +1090,7 @@ void SWI3_EGU3_IRQHandler(void)
 
 void window_1_callback ( UG_MESSAGE* msg )
 {
-
+    UNUSED_PARAMETER(msg);    
     return;
 }
 
@@ -1066,10 +1102,13 @@ UG_TEXTBOX textbox_rssi_label;
 UG_TEXTBOX textbox_per_label;
 UG_TEXTBOX textbox_rssi_number;
 UG_TEXTBOX textbox_per_number;
+UG_TEXTBOX textbox_dbm_label; 
+UG_TEXTBOX textbox_percentage_label;
+UG_TEXTBOX textbox_link_indicator;
 UG_BUTTON phy_button;
 UG_BUTTON power_button;
 UG_BUTTON adv_button;
-#define MAX_OBJECTS 10
+#define MAX_OBJECTS 15
 UG_OBJECT obj_buff_wnd_1[MAX_OBJECTS];
 
 int main(void)
@@ -1128,7 +1167,7 @@ int main(void)
 #define BTN_ID_2_WIDTH TXT_ID_0_WIDTH
 #define BTN_ID_2_HEIGHT BTN_ID_0_HEIGHT
 
-#define TXT_ID_3_X_LOCATION TXT_ID_0_X_LOCATION + 25
+#define TXT_ID_3_X_LOCATION TXT_ID_0_X_LOCATION 
 #define TXT_ID_3_Y_LOCATION BTN_ID_2_Y_LOCATION+BTN_ID_2_HEIGHT+INTERWIDGET_SPACE - 5
 #define TXT_ID_3_WIDTH 50
 #define TXT_ID_3_HEIGHT 30 
@@ -1147,6 +1186,21 @@ int main(void)
 #define TXT_ID_6_Y_LOCATION TXT_ID_4_Y_LOCATION  
 #define TXT_ID_6_WIDTH TXT_ID_5_WIDTH
 #define TXT_ID_6_HEIGHT TXT_ID_4_HEIGHT
+
+#define TXT_ID_7_X_LOCATION TXT_ID_5_X_LOCATION + TXT_ID_5_WIDTH + 2
+#define TXT_ID_7_Y_LOCATION TXT_ID_5_Y_LOCATION  
+#define TXT_ID_7_WIDTH 27
+#define TXT_ID_7_HEIGHT TXT_ID_5_HEIGHT
+
+#define TXT_ID_8_X_LOCATION TXT_ID_6_X_LOCATION + TXT_ID_6_WIDTH + 2
+#define TXT_ID_8_Y_LOCATION TXT_ID_6_Y_LOCATION  
+#define TXT_ID_8_WIDTH TXT_ID_7_WIDTH
+#define TXT_ID_8_HEIGHT TXT_ID_7_HEIGHT
+
+#define TXT_ID_9_X_LOCATION TXT_ID_7_X_LOCATION + TXT_ID_7_WIDTH + 2
+#define TXT_ID_9_Y_LOCATION TXT_ID_7_Y_LOCATION  
+#define TXT_ID_9_WIDTH 16
+#define TXT_ID_9_HEIGHT ((TXT_ID_7_HEIGHT * 2) + 2)
 
     /* Create "Toggle PHY" textbox (TXB_ID_0) */
     UG_TextboxCreate(&window_1, &textbox_toggle_phy, TXB_ID_0, TXT_ID_0_X_LOCATION, TXT_ID_0_Y_LOCATION, TXT_ID_0_X_LOCATION+TXT_ID_0_WIDTH, TXT_ID_0_Y_LOCATION+TXT_ID_0_HEIGHT);  
@@ -1227,6 +1281,26 @@ int main(void)
     UG_TextboxSetForeColor (&window_1 , TXB_ID_6 , C_MAROON ) ;
     UG_TextboxSetBackColor (&window_1 , TXB_ID_6 , C_DODGER_BLUE ); 
     UG_TextboxSetAlignment (&window_1 , TXB_ID_6 , ALIGN_CENTER );
+
+    /* Create "dBm" textbox for the RSSI metric (TXB_ID_7) */
+    UG_TextboxCreate(&window_1, &textbox_dbm_label, TXB_ID_7, TXT_ID_7_X_LOCATION, TXT_ID_7_Y_LOCATION, TXT_ID_7_X_LOCATION+TXT_ID_7_WIDTH, TXT_ID_7_Y_LOCATION+TXT_ID_7_HEIGHT);  
+    UG_TextboxSetFont(&window_1, TXB_ID_7, &FONT_8X12);
+    UG_TextboxSetText(&window_1 , TXB_ID_7 , "dBm") ;
+    UG_TextboxSetForeColor (&window_1 , TXB_ID_7 , C_MAROON ) ;
+    UG_TextboxSetBackColor (&window_1 , TXB_ID_7 , C_DODGER_BLUE ); 
+    UG_TextboxSetAlignment (&window_1 , TXB_ID_7 , ALIGN_CENTER );
+
+    /* Create "%" textbox for the PER metric (TXB_ID_8) */
+    UG_TextboxCreate(&window_1, &textbox_percentage_label, TXB_ID_8, TXT_ID_8_X_LOCATION, TXT_ID_8_Y_LOCATION, TXT_ID_8_X_LOCATION+TXT_ID_8_WIDTH, TXT_ID_8_Y_LOCATION+TXT_ID_8_HEIGHT);  
+    UG_TextboxSetFont(&window_1, TXB_ID_8, &FONT_8X12);
+    UG_TextboxSetText(&window_1 , TXB_ID_8 , "%") ;
+    UG_TextboxSetForeColor (&window_1 , TXB_ID_8 , C_MAROON ) ;
+    UG_TextboxSetBackColor (&window_1 , TXB_ID_8 , C_DODGER_BLUE ); 
+    UG_TextboxSetAlignment (&window_1 , TXB_ID_8 , ALIGN_CENTER );
+
+    /* Create Link textbox for the Link indicator (TXB_ID_9) */
+    UG_TextboxCreate(&window_1, &textbox_link_indicator, TXB_ID_9, TXT_ID_9_X_LOCATION, TXT_ID_9_Y_LOCATION, TXT_ID_9_X_LOCATION+TXT_ID_9_WIDTH, TXT_ID_9_Y_LOCATION+TXT_ID_9_HEIGHT);      
+    UG_TextboxSetBackColor (&window_1 , TXB_ID_9 , C_DARK_RED );   
 
     // Start execution.  
     NRF_LOG_INFO("Long range demo  --peripheral--");

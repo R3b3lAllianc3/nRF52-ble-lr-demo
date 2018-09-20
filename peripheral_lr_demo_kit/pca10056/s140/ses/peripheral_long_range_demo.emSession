@@ -22,6 +22,7 @@
   <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140"/>
   <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140"/>
   <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;Application"/>
+  <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;Board Definition"/>
   <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;Board Support"/>
   <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;None"/>
   <ProjectSessionItem path="peripheral_long_range_demo_pca10056_s140;peripheral_long_range_demo_pca10056_s140;nRF_BLE"/>
@@ -50,10 +51,10 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Never">
-   <Watchpoint numelements="0" expression="end_event" evalMode="0" name="end_event" radix="10" linenumber="1044" filename="../../../main.c" list=""/>
-   <Watchpoint numelements="0" expression="crc_ok_event" evalMode="0" name="crc_ok_event" radix="10" linenumber="1049" filename="../../../main.c" list=""/>
-   <Watchpoint numelements="0" expression="crc_error_event" evalMode="0" name="crc_error_event" radix="10" linenumber="1053" filename="../../../main.c" list=""/>
-   <Watchpoint numelements="0" expression="ready_event" evalMode="0" name="ready_event" radix="10" linenumber="1057" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="end_event" evalMode="0" name="end_event" radix="10" linenumber="1080" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="crc_ok_event" evalMode="0" name="crc_ok_event" radix="10" linenumber="1085" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="crc_error_event" evalMode="0" name="crc_error_event" radix="10" linenumber="1089" filename="../../../main.c" list=""/>
+   <Watchpoint numelements="0" expression="ready_event" evalMode="0" name="ready_event" radix="10" linenumber="1094" filename="../../../main.c" list=""/>
    <Watchpoint numelements="0" expression="per_value" evalMode="0" name="per_value" radix="10" linenumber="0" filename="../ses" list=""/>
   </Watches>
  </Watch1>
@@ -67,11 +68,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="499" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="536" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6196" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../ugui/ugui.c" selected="0" top="6179" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../ugui/ugui_config.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="217" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../ugui/ugui.h" selected="0" top="199" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="2400" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../../components/softdevice/s140/headers/ble_gap.h" selected="0" top="2374" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1316" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="1284" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="peripheral_long_range_demo_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" debugSearchFileMap="C:/tmp/nRF5_SDK_15.0.0_a53641a/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-lr-demo-master/peripheral_lr_demo_kit/main.c&#xa;" fileDialogInitialDirectory="C:/tmp/nRF5_SDK_15.0.0_a53641a/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-lr-demo/peripheral_lr_demo_kit" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="peripheral_long_range_demo_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" debugSearchFileMap="C:/tmp/nRF5_SDK_15.0.0_a53641a/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-lr-demo-master/peripheral_lr_demo_kit/main.c&#xa;" fileDialogInitialDirectory="C:/tmp/nRF5_SDK_15.0.0_a53641a/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-lr-demo/peripheral_lr_demo_kit" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

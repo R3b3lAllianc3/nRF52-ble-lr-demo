@@ -67,8 +67,8 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="43" y="959" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="936" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="957" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="900" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1966" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../../modules/nrfx/mdk/nrf52840_bitfields.h" selected="0" top="1956" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="central_long_range_demo_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/nordic_local/Mesh-nrf52840/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-long-range-demo-master/central_long_range_demo_kit/pca10056/s140/ses" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="central_long_range_demo_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" debugSearchFileMap="" fileDialogInitialDirectory="C:/nordic_local/Mesh-nrf52840/nRF5_SDK_15.0.0_a53641a/examples/ble_central_and_peripheral/nRF52-ble-long-range-demo-master/central_long_range_demo_kit/pca10056/s140/ses" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
