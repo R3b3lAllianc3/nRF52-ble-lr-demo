@@ -31,4 +31,6 @@ RTE/
 *.ind
 *.elf
 *.emSession
+*.jlink
+
 
