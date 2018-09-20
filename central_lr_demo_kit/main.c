@@ -91,7 +91,7 @@
 #define BUTTON_NOT_IN_USE_EVENT               BSP_EVENT_KEY_3
 
 
-#define FAST_BLINK_INTERVAL		APP_TIMER_TICKS(200) 
+#define FAST_BLINK_INTERVAL		APP_TIMER_TIKCS(200) 
 APP_TIMER_DEF(m_scan_slow_blink_timer_id);                    /**< Timer used to toggle LED for "scan mode" indication on the dev.kit. */                  
 
 #define SLOW_BLINK_INTERVAL		APP_TIMER_TICKS(750)
@@ -521,9 +521,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
        {
          rssi_value =  p_gap_evt->params.rssi_changed.rssi;
          channel_rssi =  p_gap_evt->params.rssi_changed.ch_index;
-         NRF_LOG_INFO("RSSI changed, new: %d, channel: %d", rssi_value, channel_rssi);
-         //MQ  Debug print the EVENT_READY counter
-
+         NRF_LOG_INFO("RSSI changed, new: %d, channel: %d",rssi_value, channel_rssi); 
        } break;
 
        case BLE_GATTC_EVT_TIMEOUT: // Fallthrough.
@@ -927,106 +925,16 @@ static void set_current_scan_params_and_start_scanning(void)
 }
 
 
-static void timer1_init(void)
-{
-    NRF_TIMER1->TASKS_STOP = 1;
-    NRF_TIMER1->MODE = TIMER_MODE_MODE_LowPowerCounter << TIMER_MODE_MODE_Pos; //Set the timer in counter mode
-    NRF_TIMER1->BITMODE = TIMER_BITMODE_BITMODE_32Bit << TIMER_BITMODE_BITMODE_Pos;
-    NRF_TIMER1->TASKS_CLEAR = 1; //clear the task first so it's usable later
-    NRF_TIMER1->TASKS_START = 1;
-}
-
-
-/* MQ 7/10/18  Activate PPI to count events */
-#define PIN_EVENTS_CRC_OK                    31    // RADIO->EVENTS_CRCOK  
-#define PIN_EVENTS_CRC_ERROR                 30    // RADIO->EVENTS_CRCERROR
-#define PIN_EVENTS_END                       29    // RADIO->EVENTS_END
-#define PIN_EVENTS_READY                     28    // RADIO->EVENTS_READY
-
-static void gpiote_out_init(uint32_t index, uint32_t pin, uint32_t polarity, uint32_t init_val) 
-{
-    NRF_GPIOTE->CONFIG[index] |= ((GPIOTE_CONFIG_MODE_Task << GPIOTE_CONFIG_MODE_Pos) & GPIOTE_CONFIG_MODE_Msk) |
-                            ((pin << GPIOTE_CONFIG_PSEL_Pos) & GPIOTE_CONFIG_PSEL_Msk) |
-                            ((polarity << GPIOTE_CONFIG_POLARITY_Pos) & GPIOTE_CONFIG_POLARITY_Msk) |
-                            ((init_val << GPIOTE_CONFIG_OUTINIT_Pos) & GPIOTE_CONFIG_OUTINIT_Msk);
-}
-
-void GPIOTE_IRQHandler(void)
-{
-    if(NRF_GPIOTE->EVENTS_IN[0] == 1)
-    {
-            curr_cc0 = NRF_TIMER1->CC[0];
-            curr_cc1 = NRF_TIMER1->CC[1]; //keep this if you need it
-            NRF_GPIOTE->EVENTS_IN[0] = 0;  
-    }
-
-    if(NRF_GPIOTE->EVENTS_IN[1] == 1) //will run only if you intenset event 1
-    {
-            curr_cc0 = NRF_TIMER1->CC[0]; //keep this if you need it
-            curr_cc1 = NRF_TIMER1->CC[1];
-            NRF_GPIOTE->EVENTS_IN[1] = 0; 
-    }
-}
-
-
-static void init_ppi(void) 
-{
-    const uint32_t GPIO_CH0 = 0;
-    const uint32_t GPIO_CH1 = 1;
-    const uint32_t GPIO_CH2 = 2;
-    const uint32_t GPIO_CH3 = 3;
-    const uint32_t PPI_CH0 = 10;
-    const uint32_t PPI_CH1 = 11;
-    const uint32_t PPI_CH2 = 12;
-    const uint32_t PPI_CH3 = 13;
-        
-    nrf_gpio_cfg_output(PIN_EVENTS_END);
-    nrf_gpio_cfg_output(PIN_EVENTS_CRC_OK);
-    nrf_gpio_cfg_output(PIN_EVENTS_CRC_ERROR);
-    nrf_gpio_cfg_output(PIN_EVENTS_READY);
-        
-    gpiote_out_init(GPIO_CH0, PIN_EVENTS_END, GPIOTE_CONFIG_POLARITY_Toggle, GPIOTE_CONFIG_OUTINIT_Low); // end
-    gpiote_out_init(GPIO_CH1, PIN_EVENTS_CRC_OK, GPIOTE_CONFIG_POLARITY_Toggle, GPIOTE_CONFIG_OUTINIT_Low); // crc ok
-    gpiote_out_init(GPIO_CH2, PIN_EVENTS_CRC_ERROR, GPIOTE_CONFIG_POLARITY_Toggle, GPIOTE_CONFIG_OUTINIT_Low); // crc error
-    gpiote_out_init(GPIO_CH3, PIN_EVENTS_READY, GPIOTE_CONFIG_POLARITY_Toggle, GPIOTE_CONFIG_OUTINIT_Low); // events ready
-        
-    NRF_PPI->CH[PPI_CH0].EEP = (uint32_t) &(NRF_RADIO->EVENTS_END);
-    NRF_PPI->CH[PPI_CH0].TEP = (uint32_t) &(NRF_GPIOTE->TASKS_OUT[GPIO_CH0]);
-
-    NRF_PPI->CH[PPI_CH1].EEP = (uint32_t) &(NRF_RADIO->EVENTS_CRCOK);
-    NRF_PPI->CH[PPI_CH1].TEP = (uint32_t) &(NRF_GPIOTE->TASKS_OUT[GPIO_CH1]);
-
-    NRF_PPI->CH[PPI_CH2].EEP = (uint32_t) &(NRF_RADIO->EVENTS_CRCERROR);
-    NRF_PPI->CH[PPI_CH2].TEP = (uint32_t) &(NRF_GPIOTE->TASKS_OUT[GPIO_CH2]);
-               
-    NRF_PPI->CH[PPI_CH3].EEP = (uint32_t) &(NRF_RADIO->EVENTS_READY);
-    NRF_PPI->CH[PPI_CH3].TEP = (uint32_t) &(NRF_GPIOTE->TASKS_OUT[GPIO_CH3]);
-    
-    //MQ  Fork the EEP into into TEP for triggering counter in Timer
-    //NRF_PPI->FORK[PPI_CH3].TEP = (uint32_t) &(NRF_TIMER1->TASKS_COUNT);
-    NVIC_DisableIRQ(GPIOTE_IRQn);
-    NVIC_ClearPendingIRQ(GPIOTE_IRQn);
-
-    NRF_GPIOTE->INTENSET = (1<<GPIO_CH0)|(1<<GPIO_CH1)|(1<<GPIO_CH2)|(1<<GPIO_CH3); // enable interrupts for config[n] pins
-
-    //NVIC_SetPriority(GPIOTE_IRQn, 3); //optional: set priority of interrupt
-    NVIC_EnableIRQ(GPIOTE_IRQn); 
-
-    NRF_PPI->CHENSET = (1 << PPI_CH0) | (1 << PPI_CH1) | (1 << PPI_CH2) | (1 << PPI_CH3);    
-}
-
 
 int main(void)
 {
     uint32_t err_code;
     // Initialize.
     log_init();
-  
+
+    
     timer_init();
     buttons_leds_init();
-    //MQ 7/11/18
-    timer1_init();
-    init_ppi();
 
     power_management_init();
     ble_stack_init();
