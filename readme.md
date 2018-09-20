@@ -58,7 +58,7 @@ This application is a demo kit that can be used to easily test the Bluetooth 5 l
 | ·                |                   |                     
 | Button 3 |  Switch between non-connectable and connectable advertising  |
 | ·                |                   |          
-| Button 4  |  Not in use |          
+| Button 4  |  Reset PER calculation |          
 | ·        |            |                         
 
 </td></tr> </table>
