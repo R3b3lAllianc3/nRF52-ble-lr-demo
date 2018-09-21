@@ -23,10 +23,10 @@ This application is a demo kit that can be used to easily test the Bluetooth 5 l
 1. Program the two nRF52840-DK: one peripheral and one central 
 
     a) Peripheral: 	
-	   * Attach display shield to board, program the hex file found in the following folder: {install folder}\nRF52-ble-lr-demo\peripheral_lr_demo_kit\hex
+	   Attach display shield to board, program the hex file found in the following folder: {install folder}\nRF52-ble-lr-demo\peripheral_lr_demo_kit\hex
     
     b) Central: 	
-	   * Program the hex file found in the following folder: {install folder}\nRF52-ble-lr-demo\central_lr_demo_kit\hex
+	   Program the hex file found in the following folder: {install folder}\nRF52-ble-lr-demo\central_lr_demo_kit\hex
 
 2. Use the buttons on the two nRF52840-DKs to select mode. 
 3. Ready to test! Prepare yourself for a long walk!
