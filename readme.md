@@ -13,6 +13,7 @@ This application is a demo kit that can be used to easily test the Bluetooth 5 l
 * A PC running either Windows, Linux, or Mac OS-X with [nrfjprog](http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.tools%2Fdita%2Ftools%2Fnrf5x_command_line_tools%2Fnrf5x_installation.html&cp=5_1_1) installed
 * The latest version of the J-Link [Software and Documentation pack](https://www.segger.com/downloads/jlink#)
 * 1 or 2 micro USB cables
+* Adafruit display shield from here (https://www.adafruit.com/product/1947)
 ### Optional, for  logging and debugging
 * Serial Port Viewer (for example Tera Term or Realterm)
 * [Segger Embedded Studio](https://www.segger.com/products/development-tools/embedded-studio/)
@@ -21,9 +22,12 @@ This application is a demo kit that can be used to easily test the Bluetooth 5 l
 ## How to test long range
 1. Program the two nRF52840-DK: one peripheral and one central 
 
-    a) Peripheral: program peripheral_long_range_demo_pca10056_s140.hex found in the following folder:  ..\nrf52840-long-range-demo-kit\peripheral_long_range_demo_kit\hex
+    a) Peripheral: 
+	   * Attach display shield to board.
+	   * Program the hex file found in the following folder: <install folder>\nRF52-ble-lr-demo\peripheral_lr_demo_kit\hex
     
-    b) Central: program central_long_range_demo_pca10056_s140.hex found in the following folder: ..\nrf52840-long-range-demo-kit\central_long_range_demo_kit\hex
+    b) Central: 
+	   * Program the hex file found in the following folder: <install folder>\nRF52-ble-lr-demo\central_lr_demo_kit\hex
 
 2. Use the buttons on the two nRF52840-DKs to select mode. 
 3. Ready to test! Prepare yourself for a long walk!
