@@ -22,11 +22,12 @@ This application is a demo kit that can be used to easily test the Bluetooth 5 l
 ## How to test long range
 1. Program the two nRF52840-DK: one peripheral and one central 
 
-    a) Peripheral: 
+    a) Peripheral: 	
 	   * Attach display shield to board.
+	   
 	   * Program the hex file found in the following folder: <install folder>\nRF52-ble-lr-demo\peripheral_lr_demo_kit\hex
     
-    b) Central: 
+    b) Central: 	
 	   * Program the hex file found in the following folder: <install folder>\nRF52-ble-lr-demo\central_lr_demo_kit\hex
 
 2. Use the buttons on the two nRF52840-DKs to select mode. 
