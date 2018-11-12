@@ -27,7 +27,6 @@
 _build/
 RTE/
 /*original
-*.pdf
 *.ind
 *.elf
 *.emSession
